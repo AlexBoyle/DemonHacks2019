@@ -26,11 +26,11 @@
 		});
 	};
 	module.exports.setup = function(){
-		query(`DROP TABLE IF EXISTS userRequest;`,null).then(function(){},function(err){console.log(err)});
-		query(`DROP TABLE IF EXISTS userDonation;`,null).then(function(){},function(err){console.log(err)});
-		query(`DROP TABLE IF EXISTS donationFood;`,null).then(function(){},function(err){console.log(err)});
-		query(`DROP TABLE IF EXISTS requestFood;`,null).then(function(){},function(err){console.log(err)});
-		query(`DROP TABLE IF EXISTS users;`,null).then(function(){},function(err){console.log(err)});
+		query(`DROP TABLE IF EXISTS userRequest;`,null).then(function(){
+		query(`DROP TABLE IF EXISTS userDonation;`,null).then(function(){
+		query(`DROP TABLE IF EXISTS donationFood;`,null).then(function(){
+		query(`DROP TABLE IF EXISTS requestFood;`,null).then(function(){
+		query(`DROP TABLE IF EXISTS users;`,null).then(function(){
 		query(`
 			CREATE TABLE IF NOT EXISTS users (
 				id INT NOT NULL AUTO_INCREMENT,
@@ -40,7 +40,7 @@
 				PRIMARY KEY (id)
 			);
 			`,null)
-		.then(function(){},function(err){console.log(err)});
+		.then(function(){
 		
 		query(`
 			CREATE TABLE IF NOT EXISTS donationFood (
@@ -50,7 +50,7 @@
 				PRIMARY KEY (id)
 			);
 			`,null)
-		.then(function(){},function(err){console.log(err)});
+		.then(function(){
 		
 		query(`
 			CREATE TABLE IF NOT EXISTS requestFood (
@@ -60,7 +60,7 @@
 				PRIMARY KEY (id)
 			);
 			`,null)
-		.then(function(){},function(err){console.log(err)});
+		.then(function(){
 		
 		query(`
 			CREATE TABLE IF NOT EXISTS userDonation (
@@ -68,7 +68,7 @@
 				did INT NOT NULL
 			);
 			`,null)
-		.then(function(){},function(err){console.log(err)});
+		.then(function(){
 		
 		query(`
 			CREATE TABLE IF NOT EXISTS userRequest (
@@ -77,5 +77,14 @@
 			);
 			`,null)
 		.then(function(){},function(err){console.log(err)});
+		},function(err){console.log(err)});
+		},function(err){console.log(err)});
+		},function(err){console.log(err)});
+		},function(err){console.log(err)});
+		},function(err){console.log(err)});
+		},function(err){console.log(err)});
+		},function(err){console.log(err)});
+		},function(err){console.log(err)});
+		},function(err){console.log(err)});
 	}
 }());
