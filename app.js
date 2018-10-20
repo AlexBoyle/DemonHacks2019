@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 
 sql.setup();
-let createUser(name, address, type) {
+let createUser = function(name, address, type) {
 	sql.query('INSERT INTO users (name, address, type) VALUES (?, ?, ?)', [name, address, type]).then(function(){}, function(err){console.log(err);})'
 }
 app.post('/userInfo', (req, res) => {
