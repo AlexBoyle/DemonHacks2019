@@ -87,8 +87,56 @@ knex.schema.createTable('dFood',
 //////////////////////////////////////////////////////////
 
 app.get('/', (req, res) => {
-  res.status(200).send('Hello, world!').end(); 
+  res.status(200).send('Hello, world!').end();
 });
+
+
+app.post('/userInfo', (req, res) => {
+  //TODO: do stuff with data
+
+  res.status(200);
+  res.json({
+    "type" : 'userInfo',
+    "uuid" : req.headers.uuid,
+    "name": req.body.name,
+    "address": req.body.address,
+    "type": req.body.type
+  });
+
+
+  });
+
+app.post('/donation', (req, res) => {
+  //TODO: do stuff with data
+
+  res.status(200);
+  res.json({
+    "type" : "donation",
+    "uuid" : req.headers.uuid,
+    "foodType": req.body.foodType,
+    "quantity": req.body.quantity
+  });
+
+});
+
+app.post('/request', (req, res) => {
+  //TODO: do stuff with data
+
+  res.status(200);
+  res.json({
+    "type" : "request",
+    "uuid" : req.headers.uuid,
+    "foodType": req.body.foodType,
+    "quantity": req.body.quantity
+  });
+
+});
+
+/*function checkData(data){
+  if(data == "NULL")
+    return false
+  return true
+}*/
 
 // Start the server
 const PORT = process.env.PORT || 8080;
