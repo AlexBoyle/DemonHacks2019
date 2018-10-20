@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 sql.setup();
 let createUser = function(name, address, type) {
-	sql.query('INSERT INTO users (name, address, type) VALUES (?, ?, ?)', [name, address, type]).then(function(){}, function(err){console.log(err);})'
+	sql.query('INSERT INTO users (name, address, type) VALUES (?, ?, ?)', [name, address, type]).then(function(){}, function(err){console.log(err);});
 }
 app.post('/userInfo', (req, res) => {
   //TODO: do stuff with data
