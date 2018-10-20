@@ -19,7 +19,8 @@ let createUser = function(name, address, type) {
 }
 app.post('/userInfo', (req, res) => {
   //TODO: do stuff with data
-	createUser('Alex', "11111", false);
+	createUser('Alex', "11111", false).then(function(result){res.send(result)});
+	/*
   res.status(200);
   res.json({
     "type" : 'userInfo',
@@ -28,7 +29,7 @@ app.post('/userInfo', (req, res) => {
     "address": req.body.address,
     "type": req.body.type
   });
-
+	*/
 
   });
 
