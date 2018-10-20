@@ -1,15 +1,17 @@
 (function() {
 	var mysql = require('mysql');
 	var sha256 = require('sha256');
-	var pool = mysql.createPool({
-		connectionLimit : 20,
-		host: '127.0.0.1',
-		socketPath:'',
-		user: 'root',
-		password: 'password',
-		database : 'DemonHacks',
-		port:3306
-	});
+	
+	const config = {
+	user: 'root',
+	password: 'password',
+	database: 'DemonHacks',
+	port: 3307
+	};
+	if (process.env.NODE_ENV === 'production') {
+		config.socketPath = '/cloudsql/demonhacks-1:us-central1:sql-1';
+	}
+	var pool = mysql.createPool(config);
 
 	var query = module.exports.query = function(query, params) {
 		return new Promise((resolve, reject) => {
@@ -29,19 +31,48 @@
 		query(`
 			CREATE TABLE IF NOT EXISTS users (
 				id INT NOT NULL AUTO_INCREMENT,
-				username VARCHAR(32) NOT NULL DEFAULT '',
-				fname VARCHAR(32) NOT NULL DEFAULT '',
-				Lname VARCHAR(32) NOT NULL DEFAULT '',
-				password VARCHAR(264) NOT NULL,
-				enabled BOOLEAN NOT NULL DEFAULT TRUE,
+				name VARCHAR(32) NOT NULL DEFAULT '',
+				address VARCHAR(128) NOT NULL DEFAULT '',
+				type BOOLEAN NOT NULL DEFAULT TRUE,
 				PRIMARY KEY (id)
 			);
-		`,null)
-		.then(
-			function(){},
-			function(err){
-				console.log(err)
-			}
-		);
+			`,null)
+		.then(function(){},function(err){console.log(err)});
+		
+		query(`
+			CREATE TABLE IF NOT EXISTS donationFood (
+				id INT NOT NULL AUTO_INCREMENT,
+				foodType VARCHAR(32) NOT NULL DEFAULT '',
+				quantity VARCHAR(32) NOT NULL DEFAULT '',
+				PRIMARY KEY (id)
+			);
+			`,null)
+		.then(function(){},function(err){console.log(err)});
+		
+		query(`
+			CREATE TABLE IF NOT EXISTS requestFood (
+				id INT NOT NULL AUTO_INCREMENT,
+				foodType VARCHAR(32) NOT NULL DEFAULT '',
+				quantity VARCHAR(32) NOT NULL DEFAULT '',
+				PRIMARY KEY (id)
+			);
+			`,null)
+		.then(function(){},function(err){console.log(err)});
+		
+		query(`
+			CREATE TABLE IF NOT EXISTS userDonation (
+				uid INT NOT NULL,
+				did INT NOT NULL
+			);
+			`,null)
+		.then(function(){},function(err){console.log(err)});
+		
+		query(`
+			CREATE TABLE IF NOT EXISTS userRequest (
+				uid INT NOT NULL,
+				did INT NOT NULL
+			);
+			`,null)
+		.then(function(){},function(err){console.log(err)});
 	}
 }());
