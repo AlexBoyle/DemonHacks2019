@@ -14,12 +14,12 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 
 sql.setup();
-let createUser = function(name, address, type) {
-	sql.query('INSERT INTO users (name, address, type) VALUES (?, ?, ?)', [name, address, type]).then(function(){}, function(err){console.log(err);});
+let createUser = function(res, name, address, type) {
+	sql.query('INSERT INTO users (name, address, type) VALUES (?, ?, ?)', [name, address, type]).then(function(result){res.send(result)}, function(err){console.log(err);});
 }
 app.post('/userInfo', (req, res) => {
   //TODO: do stuff with data
-	createUser('Alex', "11111", false).then(function(result){res.send(result)},function(err){console.log(err);});
+	createUser(res, 'Alex', "11111", false);
 	/*
   res.status(200);
   res.json({
