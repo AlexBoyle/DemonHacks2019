@@ -28,6 +28,11 @@
 		});
 	};
 	module.exports.setup = function(){
+		query(`DROP TABLE IF EXISTS userRequest;`,null).then(function(){},function(err){console.log(err)});
+		query(`DROP TABLE IF EXISTS userDonation;`,null).then(function(){},function(err){console.log(err)});
+		query(`DROP TABLE IF EXISTS donationFood;`,null).then(function(){},function(err){console.log(err)});
+		query(`DROP TABLE IF EXISTS requestFood;`,null).then(function(){},function(err){console.log(err)});
+		query(`DROP TABLE IF EXISTS users;`,null).then(function(){},function(err){console.log(err)});
 		query(`
 			CREATE TABLE IF NOT EXISTS users (
 				id INT NOT NULL AUTO_INCREMENT,

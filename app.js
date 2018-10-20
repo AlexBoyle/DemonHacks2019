@@ -14,7 +14,10 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 
 sql.setup();
-
+let createUser(name, address, type) {
+	sql.query('INSERT INTO users (name, address, type) VALUES (?, ?, ?)', [name, address, type]).then(function(){}, function(err){console.log(err);})'
+}
+createUser('Alex', "11111", false);
 app.post('/userInfo', (req, res) => {
   //TODO: do stuff with data
 
@@ -58,6 +61,4 @@ app.post('/request', (req, res) => {
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
-  console.log('Press Ctrl+C to quit.');
 });
-// [END gae_node_request_example]
