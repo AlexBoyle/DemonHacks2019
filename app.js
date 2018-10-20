@@ -5,6 +5,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 //const Knex = require('knex');
+var mysql = require('mysql');
 var app = express();
 app.enable('trust proxy');
 app.use(express.static('publicFiles'));
