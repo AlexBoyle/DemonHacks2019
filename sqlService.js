@@ -16,8 +16,6 @@
 	var query = module.exports.query = function(query, params) {
 		return new Promise((resolve, reject) => {
 			pool.getConnection(function (err, con) {
-				console.log(':');
-				console.log(err);
 				con.query(query, params, function(err, res, fields){
 					if(!err){
 						resolve(res);

@@ -17,10 +17,9 @@ sql.setup();
 let createUser(name, address, type) {
 	sql.query('INSERT INTO users (name, address, type) VALUES (?, ?, ?)', [name, address, type]).then(function(){}, function(err){console.log(err);})'
 }
-createUser('Alex', "11111", false);
 app.post('/userInfo', (req, res) => {
   //TODO: do stuff with data
-
+	createUser('Alex', "11111", false);
   res.status(200);
   res.json({
     "type" : 'userInfo',
