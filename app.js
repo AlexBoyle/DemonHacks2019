@@ -19,7 +19,7 @@ let createUser = function(name, address, type) {
 }
 app.post('/userInfo', (req, res) => {
   //TODO: do stuff with data
-	createUser('Alex', "11111", false).then(function(result){res.send(result)});
+	createUser('Alex', "11111", false).then(function(result){res.send(result)},function(err){console.log(err);});
 	/*
   res.status(200);
   res.json({
