@@ -34,7 +34,7 @@
 		query(`DROP TABLE IF EXISTS users;`,null).then(function(){
 		query(`
 			CREATE TABLE IF NOT EXISTS users (
-				id INT NOT NULL AUTO_INCREMENT,
+				id VARCHAR(32) NOT NULL,
 				name VARCHAR(32) NOT NULL DEFAULT '',
 				address VARCHAR(128) NOT NULL DEFAULT '',
 				type BOOLEAN NOT NULL DEFAULT TRUE,
