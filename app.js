@@ -35,11 +35,11 @@ let getDonation = function(res) {
 	sql.query('SELECT * FROM donationFood as d LEFT JOIN users AS u ON u.id=d.uid AND completed=FALSE;').then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 let putRequests = function(res, id) {
-	sql.query('UPDATE requestFood SET completed=TRUE  WHERE id=?', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
+	sql.query('UPDATE requestFood SET completed=TRUE  WHERE id=?;', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 
 let putDonation = function(res, id) {
-	sql.query('UPDATE donationFood SET completed=TRUE  WHERE id=?', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
+	sql.query('UPDATE donationFood SET completed=TRUE  WHERE id=?;', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 let getStats = function(res, id) {
 	sql.query('SELECT foodType, SUM(quantity) AS count FROM donationFood WHERE uid=? GROUP BY foodType;', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
