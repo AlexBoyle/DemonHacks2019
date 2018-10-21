@@ -18,7 +18,7 @@ let createUser = function(res, uuid,  name, address, type) {
 	sql.query('INSERT INTO users (id, name, address, type) VALUE (?, ?, ?, ?);', [uuid, name, address, type]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 let getUser = function(res, uid) {
-	sql.query('SELECT * FROM users WHERE id=?;', [uid]).then(function(result){res.json(result)}, function(err){res.json(err))});
+	sql.query('SELECT * FROM users WHERE id=?;', [uid]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 let postRequests = function(res, uid, foodType, quantity) {
 	sql.query('INSERT INTO requestFood (uid, foodType, quantity) VALUE (?, ?, ?);', [uid, foodType, quantity]).then(function(result){res.json(result)}, function(err){res.json(err)});
