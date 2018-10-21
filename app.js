@@ -74,11 +74,11 @@ app.get('/api/donation', (req, res) => {
 });
 
 app.put('/api/requests', (req, res) => {
-	putRequests(res, res.body.id);
+	putRequests(res, req.body.id);
 });
 
 app.put('/api/donation', (req, res) => {
-	putDonation(res, res.body.id);
+	putDonation(res, req.body.id);
 });
 
 const PORT = process.env.PORT || 8080;
