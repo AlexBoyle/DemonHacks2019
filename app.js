@@ -35,7 +35,7 @@ app.post('/userInfo', (req, res) => {
 	*/
 
   });
-  app.post('/userInfo', (req, res) => {
+  app.get('/userInfo', (req, res) => {
   //TODO: do stuff with data
 	getUser(res);
 	/*
