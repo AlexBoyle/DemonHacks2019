@@ -35,39 +35,18 @@ let getDonation = function(res) {
 	sql.query('SELECT * FROM donationFood as d LEFT JOIN users AS u ON u.id=d.uid AND completed=FALSE;').then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 let putRequests = function(res, id) {
-	sql.query('UPDATE requestFood SET completed=TRUE  WHERE id=?;', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
+	sql.query('UPDATE requestFood SET completed=TRUE  WHERE id=?', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 
 let putDonation = function(res, id) {
-	sql.query('UPDATE donationFood SET completed=TRUE  WHERE id=?;', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
-}
-let getStats = function(res, id) {
-	sql.query('SELECT foodType, SUM(quantity) AS count FROM donationFood WHERE uid=? GROUP BY foodType;', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
+	sql.query('UPDATE donationFood SET completed=TRUE  WHERE id=?', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 app.get('/reset', (req, res) => {
 	sql.setup();
 	res.send("Reseting DB")
 });
 app.get('/test', (req, res) => {
-  createUser({json: ()=>{}}, 1, "Chase", "2012 crossing ln Naperville Il", true);
-  postDonation({json: ()=>{}},1 , "Bread", 13);
-  postDonation({json: ()=>{}},1 , "Meat", 12);
-  postDonation({json: ()=>{}},1 , "Meat", 23);
-  postDonation({json: ()=>{}},1 , "Meat", 4);
-  postDonation({json: ()=>{}},1 , "Meat", 34);
-  postDonation({json: ()=>{}},1 , "Soup", 91);
-  postDonation({json: ()=>{}},1 , "Soup", 1);
-  postDonation({json: ()=>{}},1 , "Soup", 14);
-  postDonation({json: ()=>{}},1 , "Soup", 29);
-  postDonation({json: ()=>{}},1 , "Soup", 53);
-  postDonation({json: ()=>{}},1 , "Soup", 23);
-  postDonation({json: ()=>{}},1 , "Bread", 1);
-  postDonation({json: ()=>{}},1 , "Soup", 8);
 	res.send("Doing nothing")
-});
-
-app.get('/api/stats', (req, res) => {
-	getStats(res, req.headers.uuid);
 });
 
 app.post('/api/user', (req, res) => {

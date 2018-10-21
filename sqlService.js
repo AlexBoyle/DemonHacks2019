@@ -48,7 +48,7 @@
 				id INT NOT NULL AUTO_INCREMENT,
 				uid VARCHAR(32) NOT NULL,
 				foodType VARCHAR(32) NOT NULL DEFAULT '',
-				quantity Int ,
+				quantity VARCHAR(32) NOT NULL DEFAULT '',
 				completed BOOLEAN NOT NULL DEFAULT FALSE,
 				PRIMARY KEY (id)
 			);
@@ -60,7 +60,7 @@
 				id INT NOT NULL AUTO_INCREMENT,
 				uid VARCHAR(32) NOT NULL,
 				foodType VARCHAR(32) NOT NULL DEFAULT '',
-				quantity INT ,
+				quantity VARCHAR(32) NOT NULL DEFAULT '',
 				completed BOOLEAN NOT NULL DEFAULT FALSE,
 				PRIMARY KEY (id)
 			);
