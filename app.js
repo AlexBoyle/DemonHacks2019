@@ -66,7 +66,7 @@ app.get('/test', (req, res) => {
 	res.send("Doing nothing")
 });
 
-app.post('/api/user', (req, res) => {
+app.get('/api/stats', (req, res) => {
 	getStats(res, req.headers.uuid);
 });
 
