@@ -42,7 +42,7 @@ let putDonation = function(res, id) {
 	sql.query('UPDATE donationFood SET completed=TRUE  WHERE id=?', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 let getStats = function(res, id) {
-	sql.query('SELECT foodType, COUNT(*) AS count FROM donationFood WHERE id=? GROUP BY foodType;', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
+	sql.query('SELECT foodType, SUM(quantity) AS count FROM donationFood WHERE uid=? GROUP BY foodType;', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 app.get('/reset', (req, res) => {
 	sql.setup();
