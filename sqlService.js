@@ -3,6 +3,7 @@
 	var sha256 = require('sha256');
 	
 	const config = {
+	connectionLimit : 100,
 	user: 'root',
 	password: 'password',
 	database: 'DemonHacks',

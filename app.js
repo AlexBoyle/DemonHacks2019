@@ -15,10 +15,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 sql.setup();
 let createUser = function(res, name, address, type) {
-	sql.query('INSERT INTO users (name, address, type) VALUE (?, ?, ?)', [name, address, type]).then(function(result){res.send(result)}, function(err){console.log(err);});
+	sql.query('INSERT INTO users (name, address, type) VALUE (?, ?, ?);', [name, address, type]).then(function(result){res.send(result)}, function(err){console.log(err);});
 }
 let getUser = function(res) {
-	sql.query('SELECT * FROM users').then(function(result){res.send(result)}, function(err){console.log(err);});
+	sql.query('SELECT * FROM users;').then(function(result){res.send(result)}, function(err){console.log(err);});
 }
 app.post('/userInfo', (req, res) => {
   //TODO: do stuff with data
