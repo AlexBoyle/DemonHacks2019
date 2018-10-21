@@ -67,6 +67,10 @@ app.get('/test', (req, res) => {
 });
 
 app.post('/api/user', (req, res) => {
+	getStats(res, req.headers.uuid);
+});
+
+app.post('/api/user', (req, res) => {
 	createUser(res, req.headers.uuid, req.body.name, req.body.address, req.body.type);
 });
 
