@@ -41,13 +41,38 @@ let putRequests = function(res, id) {
 let putDonation = function(res, id) {
 	sql.query('UPDATE donationFood SET completed=TRUE  WHERE id=?', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
+let donationStats = function(res, uid) {
+	sql.query('SELECT foodType , COUNT(quantity) as COUNT FROM donationFood WHERE uid=? GROUP BY foodType;', [uid]).then(function(result){res.json(result)}, function(err){res.json(err)});
+}
+let requestStats = function(res, uid) {
+	sql.query('SELECT foodType , COUNT(quantity) as COUNT FROM requestFood WHERE uid=? GROUP BY foodType;', [uid]).then(function(result){res.json(result)}, function(err){res.json(err)});
+}
 app.get('/reset', (req, res) => {
 	sql.setup();
 	res.send("Reseting DB")
 });
 app.get('/test', (req, res) => {
 	res.send("Doing nothing")
+  postRequests({json:()=>{}}, 1, "Bagles", 123);
+  postRequests({json:()=>{}}, 1, "Bagles", 123);
+  postRequests({json:()=>{}}, 1, "Bagles", 123);
+  postRequests({json:()=>{}}, 1, "Bagles", 123);
+  postRequests({json:()=>{}}, 1, "Bagles", 123);
+  postRequests({json:()=>{}}, 1, "Bagles", 123);
+  postRequests({json:()=>{}}, 1, "Bagles", 123);
+  postRequests({json:()=>{}}, 1, "Bagles", 123);
+  postRequests({json:()=>{}}, 1, "Bagles", 123);
+  postRequests({json:()=>{}}, 1, "Bagles", 123);
 });
+
+app.get('/api/stats/req', (req, res) => {
+	getUser(res, req.headers.uuid);
+});
+
+app.get('/api/stats/don', (req, res) => {
+	getUser(res, req.headers.uuid);
+});
+
 
 app.post('/api/user', (req, res) => {
 	createUser(res, req.headers.uuid, req.body.name, req.body.address, req.body.type);
