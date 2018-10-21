@@ -15,31 +15,31 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 sql.setup();
 let createUser = function(res, uuid,  name, address, type) {
-	sql.query('INSERT INTO users (id, name, address, type) VALUE (?, ?, ?, ?);', [uuid, name, address, type]).then(function(result){res.send(JSON.stringify(result))}, function(err){res.send(JSON.stringify(err))});
+	sql.query('INSERT INTO users (id, name, address, type) VALUE (?, ?, ?, ?);', [uuid, name, address, type]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 let getUser = function(res, uid) {
-	sql.query('SELECT * FROM users WHERE id=?;', [uid]).then(function(result){res.send(JSON.stringify(result))}, function(err){res.send(JSON.stringify(err))});
+	sql.query('SELECT * FROM users WHERE id=?;', [uid]).then(function(result){res.json(result)}, function(err){res.json(err))});
 }
 let postRequests = function(res, uid, foodType, quantity) {
-	sql.query('INSERT INTO requestFood (uid, foodType, quantity) VALUE (?, ?, ?);', [uid, foodType, quantity]).then(function(result){res.send(JSON.stringify(result))}, function(err){res.send(JSON.stringify(err))});
+	sql.query('INSERT INTO requestFood (uid, foodType, quantity) VALUE (?, ?, ?);', [uid, foodType, quantity]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 
 let postDonation = function(res, uid, foodType, quantity) {
-	sql.query('INSERT INTO donationFood (uid, foodType, quantity) VALUE (?, ?, ?);', [uid, foodType, quantity]).then(function(result){res.send(JSON.stringify(result))}, function(err){res.send(JSON.stringify(err))});
+	sql.query('INSERT INTO donationFood (uid, foodType, quantity) VALUE (?, ?, ?);', [uid, foodType, quantity]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 let getRequests = function(res) {
-	sql.query('SELECT * FROM requestFood as r LEFT JOIN users AS u ON u.id=r.uid AND completed=FALSE;').then(function(result){res.send(JSON.stringify(result))}, function(err){res.send(JSON.stringify(err))});
+	sql.query('SELECT * FROM requestFood as r LEFT JOIN users AS u ON u.id=r.uid AND completed=FALSE;').then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 
 let getDonation = function(res) {
-	sql.query('SELECT * FROM donationFood as d LEFT JOIN users AS u ON u.id=d.uid AND completed=FALSE;').then(function(result){res.send(JSON.stringify(result))}, function(err){res.send(JSON.stringify(err))});
+	sql.query('SELECT * FROM donationFood as d LEFT JOIN users AS u ON u.id=d.uid AND completed=FALSE;').then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 let putRequests = function(res, id) {
-	sql.query('UPDATE requestFood SET completed=TRUE  WHERE id=?', [id]).then(function(result){res.send(JSON.stringify(result))}, function(err){res.send(JSON.stringify(err))});
+	sql.query('UPDATE requestFood SET completed=TRUE  WHERE id=?', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 
 let putDonation = function(res, id) {
-	sql.query('UPDATE donationFood SET completed=TRUE  WHERE id=?', [id]).then(function(result){res.send(JSON.stringify(result))}, function(err){res.send(JSON.stringify(err))});
+	sql.query('UPDATE donationFood SET completed=TRUE  WHERE id=?', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 app.get('/reset', (req, res) => {
 	sql.setup();
