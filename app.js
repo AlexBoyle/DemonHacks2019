@@ -41,11 +41,17 @@ let putRequests = function(res, id) {
 let putDonation = function(res, id) {
 	sql.query('UPDATE donationFood SET completed=TRUE  WHERE id=?', [id]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
-let donationStats = function(res, uid) {
-	sql.query('SELECT foodType , COUNT(quantity) as COUNT FROM donationFood WHERE uid=? GROUP BY foodType;', [uid]).then(function(result){res.json(result)}, function(err){res.json(err)});
+let donationStatsSum = function(res, uid) {
+	sql.query('SELECT foodType, SUM(quantity) AS count FROM donationFood WHERE uid=? GROUP BY foodType;', [uid]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
-let requestStats = function(res, uid) {
-	sql.query('SELECT foodType , COUNT(quantity) as COUNT FROM requestFood WHERE uid=? GROUP BY foodType;', [uid]).then(function(result){res.json(result)}, function(err){res.json(err)});
+let requestStatsSum = function(res, uid) {
+	sql.query('SELECT foodType, SUM(quantity) AS count FROM requestFood WHERE uid=? GROUP BY foodType;', [uid]).then(function(result){res.json(result)}, function(err){res.json(err)});
+}
+let donationStatsCount = function(res, uid) {
+	sql.query('SELECT foodType, Count(quantity) AS count FROM donationFood WHERE uid=? GROUP BY foodType;', [uid]).then(function(result){res.json(result)}, function(err){res.json(err)});
+}
+let requestStatsCount = function(res, uid) {
+	sql.query('SELECT foodType, Count(quantity) AS count FROM requestFood WHERE uid=? GROUP BY foodType;', [uid]).then(function(result){res.json(result)}, function(err){res.json(err)});
 }
 app.get('/reset', (req, res) => {
 	sql.setup();
@@ -53,6 +59,11 @@ app.get('/reset', (req, res) => {
 });
 app.get('/test', (req, res) => {
 	res.send("Doing nothing")
+  createUser({json:()=>{}}, 1, "Pasta", "213 Way", true);
+  
+  postRequests({json:()=>{}}, 1, "Bagles", 123);
+  postRequests({json:()=>{}}, 1, "Bagles", 123);
+  postRequests({json:()=>{}}, 1, "Not Bagles", 123);
   postRequests({json:()=>{}}, 1, "Bagles", 123);
   postRequests({json:()=>{}}, 1, "Bagles", 123);
   postRequests({json:()=>{}}, 1, "Bagles", 123);
@@ -60,17 +71,25 @@ app.get('/test', (req, res) => {
   postRequests({json:()=>{}}, 1, "Bagles", 123);
   postRequests({json:()=>{}}, 1, "Bagles", 123);
   postRequests({json:()=>{}}, 1, "Bagles", 123);
-  postRequests({json:()=>{}}, 1, "Bagles", 123);
-  postRequests({json:()=>{}}, 1, "Bagles", 123);
-  postRequests({json:()=>{}}, 1, "Bagles", 123);
+  
+  postDonation({json:()=>{}}, 1, "Bagles", 123);
+  postDonation({json:()=>{}}, 1, "Bagles", 123);
+  postDonation({json:()=>{}}, 1, "Pasta", 123);
+  postDonation({json:()=>{}}, 1, "Bagles", 123);
+  postDonation({json:()=>{}}, 1, "Bagles", 123);
+  postDonation({json:()=>{}}, 1, "Bagles", 123);
+  postDonation({json:()=>{}}, 1, "Bagles", 123);
+  postDonation({json:()=>{}}, 1, "Bagles", 123);
+  postDonation({json:()=>{}}, 1, "Bagles", 123);
+  postDonation({json:()=>{}}, 1, "Bagles", 123);
 });
 
 app.get('/api/stats/req', (req, res) => {
-	getUser(res, req.headers.uuid);
+	requestStats(res, req.headers.uuid);
 });
 
 app.get('/api/stats/don', (req, res) => {
-	getUser(res, req.headers.uuid);
+	donationStats(res, req.headers.uuid);
 });
 
 
