@@ -84,14 +84,21 @@ app.get('/test', (req, res) => {
   postDonation({json:()=>{}}, 1, "Bagles", 123);
 });
 
-app.get('/api/stats/req', (req, res) => {
-	requestStats(res, req.headers.uuid);
+app.get('/api/stats/req/sum', (req, res) => {
+	requestStatsSum(res, req.headers.uuid);
 });
 
-app.get('/api/stats/don', (req, res) => {
-	donationStats(res, req.headers.uuid);
+app.get('/api/stats/don/sum', (req, res) => {
+	donationStatsSum(res, req.headers.uuid);
 });
 
+app.get('/api/stats/req/count', (req, res) => {
+	requestStatsCount(res, req.headers.uuid);
+});
+
+app.get('/api/stats/don/count', (req, res) => {
+	donationStatsCount(res, req.headers.uuid);
+});
 
 app.post('/api/user', (req, res) => {
 	createUser(res, req.headers.uuid, req.body.name, req.body.address, req.body.type);
