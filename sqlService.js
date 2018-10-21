@@ -60,7 +60,7 @@
 				id INT NOT NULL AUTO_INCREMENT,
 				uid VARCHAR(32) NOT NULL,
 				foodType VARCHAR(32) NOT NULL DEFAULT '',
-				quantity VARCHAR(32) NOT NULL DEFAULT '',
+				quantity INT NOT NULL DEFAULT '',
 				completed BOOLEAN NOT NULL DEFAULT FALSE,
 				PRIMARY KEY (id)
 			);
