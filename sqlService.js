@@ -46,8 +46,10 @@
 		query(`
 			CREATE TABLE IF NOT EXISTS donationFood (
 				id INT NOT NULL AUTO_INCREMENT,
+				uid VARCHAR(32) NOT NULL,
 				foodType VARCHAR(32) NOT NULL DEFAULT '',
 				quantity VARCHAR(32) NOT NULL DEFAULT '',
+				completed BOOLEAN NOT NULL DEFAULT FALSE,
 				PRIMARY KEY (id)
 			);
 			`,null)
@@ -56,29 +58,14 @@
 		query(`
 			CREATE TABLE IF NOT EXISTS requestFood (
 				id INT NOT NULL AUTO_INCREMENT,
+				uid VARCHAR(32) NOT NULL,
 				foodType VARCHAR(32) NOT NULL DEFAULT '',
 				quantity VARCHAR(32) NOT NULL DEFAULT '',
+				completed BOOLEAN NOT NULL DEFAULT FALSE,
 				PRIMARY KEY (id)
 			);
 			`,null)
 		.then(function(){
-		
-		query(`
-			CREATE TABLE IF NOT EXISTS userDonation (
-				uid INT NOT NULL,
-				did INT NOT NULL
-			);
-			`,null)
-		.then(function(){
-		
-		query(`
-			CREATE TABLE IF NOT EXISTS userRequest (
-				uid INT NOT NULL,
-				did INT NOT NULL
-			);
-			`,null)
-		.then(function(){},function(err){console.log(err)});
-		},function(err){console.log(err)});
 		},function(err){console.log(err)});
 		},function(err){console.log(err)});
 		},function(err){console.log(err)});
